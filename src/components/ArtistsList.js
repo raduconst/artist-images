@@ -1,11 +1,9 @@
 import React from 'react';
-import { useEffect } from 'react/cjs/react.development';
 import SingleArtist from './SingleArtist';
 
+import './ArtistList.css';
+
 const ArtistsList = props => {
-	// console.log(props.artists);
-	// console.log(typeof(props.artists));
-	
 	let artistList = null;
 	if ( props.artists ) {
 		artistList = props.artists.map( artist => (

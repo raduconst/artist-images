@@ -1,9 +1,16 @@
-.SingleArtist li {
-	list-style: none;
-	display: inline;
-
+.artist-wrapper ul {
+	padding: 0;
 }
 
-.SingleArtist img {
+.artist-wrapper li {
+	list-style: none;
+	display: inline;
+}
+
+.artist-wrapper > * {
+	text-align: center;
+}
+
+.artist-wrapper img {
 	padding: 0 5px;
 }

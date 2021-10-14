@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ArtistsList from './ArtistsList';
+import ArtistForm from './ArtistForm';
 
 const Artists = props => {
 	const [artists, setArtists] = useState([]);
@@ -20,8 +21,26 @@ const Artists = props => {
 			});
 	}, []);
 
-	const addImagesHandler = () => {
-
+	const addImagesHandler = ( newItem ) => {
+		console.log( newItem );
+		const artistsCopy = [];
+		artists.map( artist => {
+			if ( artist.id === newItem.userId ) {
+				const newImages = artist.images;
+				newImages.push(newItem.imageUrl);
+				console.log(newImages);
+				artistsCopy.push({
+					...artist,
+					images: newImages,
+				})
+			} else {
+				artistsCopy.push({
+					...artist,
+				})
+			}
+		});
+		console.log(artistsCopy);
+		setArtists(artistsCopy);
 	}
 
 	// const removeIngredientHandler = ingredientId => {
@@ -44,9 +63,10 @@ const Artists = props => {
 			<ArtistsList
 				artists={artists}
 			/>
-			{/* <ArtistForm 
+			<ArtistForm 
 				onAddImages={addImagesHandler}
-			/> */}
+				artists={artists}
+			/>
 		</div>
 	)
 }
