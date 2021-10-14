@@ -1,0 +1,9 @@
+.SingleArtist li {
+	list-style: none;
+	display: inline;
+
+}
+
+.SingleArtist img {
+	padding: 0 5px;
+}
