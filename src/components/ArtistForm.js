@@ -4,17 +4,20 @@ import Card from '../UI/Card/Card';
 const ArtistForm = props => {
 	const [userId, setUserId] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
-	console.log(props.artists);
+	const [formIsvalid, setFormIsValid] = useState(false);
+
 	const submitHandler = ( event ) => {
 		event.preventDefault();
 		props.onAddImages({ userId: userId, imageUrl: imageUrl });
+		setUserId('');
+		setImageUrl('');
 	}
 
 	let artistOptions = [];
 	props.artists.map( artist => artistOptions.push(<option key={artist.id} value={artist.id}>{artist.name}</option>) );
 
 	return (
-		<section className="ingredient-form">
+		<section className="artist-image-form">
 		<Card>
 			<form onSubmit={submitHandler}>
 			<div className="form-control">
@@ -33,7 +36,7 @@ const ArtistForm = props => {
 				/>
 			</div>
 			<div className="artist-form__actions">
-				<button type="submit">Add Image</button>
+				<button type="submit" disabled={!formIsvalid}>Add Image</button>
 			</div>
 			</form>
 		</Card>

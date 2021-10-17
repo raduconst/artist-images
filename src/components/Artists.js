@@ -4,11 +4,15 @@ import ArtistForm from './ArtistForm';
 
 const Artists = props => {
 	const [artists, setArtists] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState();
 
 	useEffect(() => {
+		setIsLoading( true );
 		fetch('https://artist-images-2a66a-default-rtdb.firebaseio.com/artists.json')
 			.then( response => response.json() )
 			.then( responseData => {
+				setIsLoading( false );
 				const loadedArtists = [];
 				for ( const key in responseData ) {
 					loadedArtists.push({
@@ -18,11 +22,14 @@ const Artists = props => {
 					});
 				}
 				setArtists( loadedArtists );
+			})
+			.catch( err => {
+				setError( err.message );
+				setIsLoading( false );
 			});
 	}, []);
 
 	const addImagesHandler = ( newItem ) => {
-		console.log( newItem );
 		const artistsCopy = [];
 		artists.map( artist => {
 			if ( artist.id === newItem.userId ) {
@@ -43,25 +50,13 @@ const Artists = props => {
 		setArtists(artistsCopy);
 	}
 
-	// const removeIngredientHandler = ingredientId => {
-    //     setIsLoading(true);
-    //     fetch(`https://artist-images-2a66a-default-rtdb.firebaseio.com/artists/${artisttId}.json`, {
-    //         method: 'POST',
-    //     }).then(response => {
-    //         setIsLoading(false);
-    //         setIngredients(prevIngredients =>
-    //             prevIngredients.filter(ingredient => ingredient.id !== ingredientId)
-    //         );
-    //     }).catch(error => {
-    //         setError(error.message);
-    //         setIsLoading(false);
-    //     });
-    // };
-
 	return (
 		<div>
+			{error && <div>Can't load data from server: {error}</div>}
+
 			<ArtistsList
 				artists={artists}
+				isLoading={isLoading}
 			/>
 			<ArtistForm 
 				onAddImages={addImagesHandler}

@@ -1,7 +1,8 @@
 import React from 'react';
-import SingleArtist from './SingleArtist';
-
 import './ArtistList.css';
+
+import SingleArtist from './SingleArtist';
+import Spinner from '../UI/Spinner/Spinner';
 
 const ArtistsList = props => {
 	let artistList = null;
@@ -17,10 +18,13 @@ const ArtistsList = props => {
 	}
 	
 	return (
-		<section className="artists-list">
-			<h2>List of artists</h2>
-			{artistList}
-		</section>
+		<div>
+			{props.isLoading && <Spinner />}
+			<section className="artists-list">
+				<h2>List of artists</h2>
+				{artistList}
+			</section>
+		</div>
 	)
 }
 
