@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ArtistsList from './ArtistsList';
 import ArtistForm from './ArtistForm';
 
-const Artists = props => {
+const Artists = () => {
 	const [artists, setArtists] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
@@ -31,6 +31,13 @@ const Artists = props => {
 
 	const addImageHandler = ({userId, imageUrl}) => {
 		const artistsCopy = [];
+
+		// this is the case when the dropdown field is not changed 
+		// and the first value is used
+		if ( userId === '' ) {
+			userId = artists[0].id;
+		}
+
 		artists.map( artist => {
 			if ( artist.id === userId ) {
 				const newImages = artist.images;
