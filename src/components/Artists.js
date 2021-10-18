@@ -29,7 +29,7 @@ const Artists = props => {
 			});
 	}, []);
 
-	const addImagesHandler = ({userId, imageUrl}) => {
+	const addImageHandler = ({userId, imageUrl}) => {
 		const artistsCopy = [];
 		artists.map( artist => {
 			if ( artist.id === userId ) {
@@ -38,7 +38,19 @@ const Artists = props => {
 				artistsCopy.push({
 					...artist,
 					images: newImages,
-				})
+				});
+				setIsLoading( true );
+				fetch(`https://artist-images-2a66a-default-rtdb.firebaseio.com/artists/${userId}.json`, {
+					method: 'PATCH',
+					body: JSON.stringify({images: newImages}),
+					headers: { 'Content-Type': 'application/json' }
+				}).then(response => response.json() )
+				.then(responseData => {
+					setIsLoading( false );
+				}).catch( err => {
+					setError( err.message );
+					setIsLoading( false );
+				});
 			} else {
 				artistsCopy.push({
 					...artist,
@@ -57,7 +69,7 @@ const Artists = props => {
 				isLoading={isLoading}
 			/>
 			<ArtistForm 
-				onAddImages={addImagesHandler}
+				onAddImages={addImageHandler}
 				artists={artists}
 			/>
 		</div>
