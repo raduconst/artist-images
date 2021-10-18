@@ -1,10 +1,10 @@
-export const checkValidity = ( value, rules ) => {
-	let isValid = true;
+import * as constants from '../shared/constants';
 
+export const checkValidity = ( value, rules ) => {
 	if ( rules.isImage ) {
-		const pattern = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
-		isValid = pattern.test( value );
+		const pattern = constants.IMAGE_FILE_PATTERN;
+		return pattern.test( value );
 	}
 
-	return isValid;
+	return true;
 }

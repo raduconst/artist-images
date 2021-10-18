@@ -1,0 +1,1 @@
+export const IMAGE_FILE_PATTERN = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;

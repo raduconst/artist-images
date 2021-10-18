@@ -29,13 +29,12 @@ const Artists = props => {
 			});
 	}, []);
 
-	const addImagesHandler = ( newItem ) => {
+	const addImagesHandler = ({userId, imageUrl}) => {
 		const artistsCopy = [];
 		artists.map( artist => {
-			if ( artist.id === newItem.userId ) {
+			if ( artist.id === userId ) {
 				const newImages = artist.images;
-				newImages.push(newItem.imageUrl);
-				console.log(newImages);
+				newImages.push(imageUrl);
 				artistsCopy.push({
 					...artist,
 					images: newImages,
@@ -46,7 +45,6 @@ const Artists = props => {
 				})
 			}
 		});
-		console.log(artistsCopy);
 		setArtists(artistsCopy);
 	}
 

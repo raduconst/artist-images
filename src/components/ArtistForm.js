@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Card from '../UI/Card/Card';
 
+import { checkValidity } from '../shared/utility';
+
 const ArtistForm = props => {
 	const [userId, setUserId] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
@@ -11,10 +13,20 @@ const ArtistForm = props => {
 		props.onAddImages({ userId: userId, imageUrl: imageUrl });
 		setUserId('');
 		setImageUrl('');
+		setFormIsValid(false);
+	}
+
+	const onHandleInputChange = event => {
+		setImageUrl( event.target.value );
+		if ( checkValidity( event.target.value, {isImage: true}) ) {
+			setFormIsValid(true);
+		} else {
+			setFormIsValid(false);
+		}
 	}
 
 	let artistOptions = [];
-	props.artists.map( artist => artistOptions.push(<option key={artist.id} value={artist.id}>{artist.name}</option>) );
+	artistOptions = props.artists.map( ({id, name}) => (<option key={id} value={id}>{name}</option>) );
 
 	return (
 		<section className="artist-image-form">
@@ -32,7 +44,7 @@ const ArtistForm = props => {
 					type="text" 
 					id="imageUrl"
 					value={imageUrl} 
-					onChange={ event => setImageUrl( event.target.value ) } 
+					onChange={onHandleInputChange} 
 				/>
 			</div>
 			<div className="artist-form__actions">

@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Picture = props => {
+const Picture = ({imgLink}) => {
 	return (
-		<img src={props.imgLink} />
+		<img src={imgLink} alt="Artist image" />
 	)
+}
+
+Picture.propTypes = {
+	imgLink: PropTypes.string.isRequired,
 }
 
 export default Picture;

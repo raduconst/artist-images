@@ -16,4 +16,4 @@ This is a small project that's showing a list of artists and their images
 
 ### To add
 
-- updating the database values;
+- updating the database values on form submit;
