@@ -1,5 +1,5 @@
 import React from 'react';
-import Picture from '../UI/Picture/Picture';
+import { Picture } from '../UI';
 import './SingleArtist.css';
 
 import Card from '../UI/Card/Card';

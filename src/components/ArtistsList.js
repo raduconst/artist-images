@@ -2,7 +2,7 @@ import React from 'react';
 import './ArtistList.css';
 
 import SingleArtist from './SingleArtist';
-import Spinner from '../UI/Spinner/Spinner';
+import { Spinner } from '../UI';
 
 const ArtistsList = props => {
 	let artistList = null;

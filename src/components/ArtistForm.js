@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Card from '../UI/Card/Card';
+import { Card } from '../UI';
 
 import { checkValidity } from '../shared/utility';
 
