@@ -13,7 +13,6 @@ This is a small project that's showing a list of artists and their images
 - added a loading spinner;
 - clearing the fields after submitting;
 - checking for the correct image format (image format).
-
-### To add
-
 - updating the database values on form submit;
+
+### To add - everything is done
